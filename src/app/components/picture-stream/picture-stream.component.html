@@ -1,0 +1,22 @@
+<div class="form">
+  <mat-form-field>
+    <mat-label>Номер картинки</mat-label>
+    <input matInput [(ngModel)]="testNumber">
+  </mat-form-field>
+  <button mat-raised-button (click)="loadImg()" [disabled]="isLoading">Підтвердити</button>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+</div>
+<div class="messages">
+  <div class="no-image" *ngIf="imageNotFound">
+    <h2>Зображення не знайдено</h2>
+  </div>
+  <div class="image-size" *ngIf="(isLoading || isImageLoaded) && !imageNotFound">
+    <h3>Розмір зображення {{ imgWidth + ' на ' + imgHeight }}</h3>
+  </div>
+</div>
+<img id="image"
+      src=""
+      alt="Тут буде картинка"
+      [width]="imgWidth"
+      [height]="imgHeight"
+      [ngClass]="{ 'showed' : isLoading || isImageLoaded, 'hidden' : !isLoading && !isImageLoaded || imageNotFound }">
